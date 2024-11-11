@@ -47,14 +47,16 @@ ft_lstsize_bonus.c
 OBJS= $(SRCS:.c=.o)
 BONUS_OBJS= $(BONUS_SRCS:.c=.o)
 
+all: $(NAME)
+
 $(NAME): $(OBJS)
 	ar -rc $(NAME) $(OBJS)
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
-all: $(NAME)
-
+bonus: $(BONUS_OBJS)
+	ar -rc $(NAME) $(BONUS_OBJS)
 clean:
 	rm -rf $(OBJS) $(BONUS_OBJS)
 
@@ -63,8 +65,4 @@ fclean: clean
 
 re: fclean all
 
-$(BONUS_OBJS):
-	ar -rc $(NAME) $(BONUS_OBJS)
-
-bonus: $(NAME) $(BONUS_OBJS)
 .PHONY: all clean fclean bonus re
