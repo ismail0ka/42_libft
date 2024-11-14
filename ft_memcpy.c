@@ -6,7 +6,7 @@
 /*   By: ikarouat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 21:07:04 by ikarouat          #+#    #+#             */
-/*   Updated: 2024/11/03 15:00:03 by ikarouat         ###   ########.fr       */
+/*   Updated: 2024/11/13 23:15:13 by ikarouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,11 @@ void	*ft_memcpy(void *dst, const void *src, size_t n)
 	unsigned char	*tmp_d;
 	unsigned char	*tmp_s;
 
-	if (!dst && !src)
+	if (!dst)
 		return (NULL);
-	tmp_d = (unsigned char *) dst;
+	if (!src)
+		return (dst);
+	tmp_d = dst;
 	tmp_s = (unsigned char *)src;
 	while (n > 0)
 	{

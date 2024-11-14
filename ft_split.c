@@ -6,19 +6,21 @@
 /*   By: ikarouat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/24 20:03:32 by ikarouat          #+#    #+#             */
-/*   Updated: 2024/11/10 22:38:42 by ikarouat         ###   ########.fr       */
+/*   Updated: 2024/11/12 16:47:03 by ikarouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 #include "libft.h"
 
-static void	free_chunks(char **strs)
+static void	free_chunks(char **strs, unsigned int exist)
 {
 	unsigned int	i;
 
 	i = 0;
-	while (strs[i])
-		free(strs[i++]);
+	while (i < exist)
+	{
+		free(strs[i]);
+		i++;
+	}
 	free(strs);
 }
 
@@ -51,7 +53,8 @@ static unsigned int	next_delimiter(const char *s, int c)
 	return (count);
 }
 
-static char	*get_next_word(const char **s, int c)
+static char	*get_next_word(char **strs, const char **s
+	, int c, unsigned int exist)
 {
 	char			*chunk;
 	unsigned int	del;
@@ -63,7 +66,10 @@ static char	*get_next_word(const char **s, int c)
 	del = next_delimiter(*s, c);
 	chunk = (char *)malloc(del + 1);
 	if (!chunk)
-		return (ft_strdup(""));
+	{
+		free_chunks(strs, exist);
+		return (NULL);
+	}
 	while (i < del)
 		chunk[i++] = *((*s)++);
 	chunk[i] = '\0';
@@ -83,18 +89,15 @@ char	**ft_split(char const *s, char c)
 	res = (char **)malloc((res_len + 1) * sizeof(char *));
 	if (!res)
 		return (NULL);
-	res[res_len] = NULL;
 	i = 0;
 	while (*s && i < res_len)
 	{
-		chunk = get_next_word(&s, c);
-		if (!*chunk)
-		{
-			free_chunks(res);
+		chunk = get_next_word(res, &s, c, i);
+		if (!chunk)
 			return (NULL);
-		}
 		else
 			res[i++] = chunk;
 	}
+	res[res_len] = NULL;
 	return (res);
 }

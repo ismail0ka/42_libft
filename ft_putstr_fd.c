@@ -6,7 +6,7 @@
 /*   By: ikarouat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/28 21:33:14 by ikarouat          #+#    #+#             */
-/*   Updated: 2024/11/03 14:51:12 by ikarouat         ###   ########.fr       */
+/*   Updated: 2024/11/12 21:05:16 by ikarouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,7 @@
 
 void	ft_putstr_fd(char *s, int fd)
 {
-	size_t	len;
-
-	if (fd < 0)
+	if (fd < 0 || !s)
 		return ;
-	if (!s)
-		return ;
-	len = ft_strlen(s);
-	write(fd, s, len);
+	write(fd, s, ft_strlen(s));
 }

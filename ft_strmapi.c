@@ -6,7 +6,7 @@
 /*   By: ikarouat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/25 19:19:03 by ikarouat          #+#    #+#             */
-/*   Updated: 2024/11/05 22:45:09 by ikarouat         ###   ########.fr       */
+/*   Updated: 2024/11/12 21:10:46 by ikarouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*ft_strmapi(const char *s, char (*f)(unsigned int, char))
 	size_t	new_s_len;
 	char	*new_s;
 
-	if (!s)
+	if (!s || !f)
 		return (NULL);
 	i = 0;
 	new_s_len = ft_strlen(s);

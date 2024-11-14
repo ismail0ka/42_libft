@@ -6,7 +6,7 @@
 /*   By: ikarouat <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/22 15:35:10 by ikarouat          #+#    #+#             */
-/*   Updated: 2024/11/07 23:28:44 by ikarouat         ###   ########.fr       */
+/*   Updated: 2024/11/14 23:35:31 by ikarouat         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,12 @@ char	*ft_strjoin(const char *s1, char const *s2)
 	char	*new_s;
 	char	*tmp;
 
-	if (!s1)
-		s1 = ft_strdup("");
-	if (!s2)
-		s2 = ft_strdup("");
+	if (!s1 && !s2)
+		return (NULL);
+	if (!s1 && s2)
+		return (ft_strdup(s2));
+	else if (!s2 && s1)
+		return (ft_strdup(s1));
 	len = ft_strlen(s1) + ft_strlen(s2);
 	new_s = malloc(len + 1);
 	if (!new_s)
